@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The word box</title>
+
+	<style type="text/css">
+		body {
+			background-color: pink;
+			color: white;}
+		
+		#wordContainer {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			background-color: white; 
+			border-left:4px solid white;
+			border-right: 4px solid white;
+			
+		}
+		.letterBox {
+			background-color: pink;
+			text-align: center;
+			margin: 5px;
+			width: 40px;
+			height: 45px;
+		}
+		.letter {
+			margin: 4px;
+			font-family: sans-serif;
+			font-size: 2em;
+			width: 23px;
+		}
+
+
+
+
+	</style>
+</head>
+
+
+<body>
+	<h1> Hangman Game with jquery</h1>
+	<button id="iniciar">inicia juego</button>
+
+	
+	<div id="mainArea">
+		<div id="wordContainer">
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript">
+	
+		
+// 1. GLOBAL VARIABLES /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		$(document).ready(function() {
+
+		var cities = ["berlin", "munich", "stuttgart", "colone", "hamburg", "frankfurt", "essen", "dortmund", "bremen"];	
+		var failLetters = [];
+		var empty = [];
+		var lostHealth = 0;
+		var finalG = []; 
+				
+//  2. SELECT A WORD RANDOMLY -- After Cick on button ///////////////////////////////////////////////////////////////////////
+		
+		$("#iniciar").on("click", function() {
+	  		var game = cities[Math.floor(Math.random() * cities.length)];
+																	console.log (game);
+	  		
+// 3. CREATES EMPTY ARRAY AND FINALG ARRAY //////////////////////////////////////////////////////////////////////// 		
+	  		for (var i = 0; i < game.length; i++){
+	  			empty.push("");
+	  		}
+														console.log(empty);
+
+	  		for (var i = 0; i < game.length; i++){
+	  			finalG.push(game[i]);
+	  		}
+console.log(finalG);
+	  			
+// 4. DEFINE THE WORD CONTAINER WIDTH ////////////////////////////////////////////////////////////////////////////
+	  		var widthContainer = (game.length * 41) + "px"; 
+	  		document.getElementById("wordContainer").style.width = widthContainer;
+
+
+
+// 5. CREATE DIV BOXES FOR THE LETTERS ///// ///////////////////////////////////////////////////////////////////
+	  		
+			var letterBox;
+			var theletter;
+
+			for (var i = 0; i < empty.length; i++) {
+	  			letterBox = $("<div>");
+	  			letterBox.attr("class", "letterBox");
+	  			letterBox.attr("letter-ind", i);
+	  			$("#wordContainer").append(letterBox);
+	  			theletter = $("<h2>");
+	  			theletter.attr("class", "letter");
+	  			letterBox.append(theletter);
+	  			theletter.html(empty[i]);
+	  		}
+
+//  6. PLAYER MAKES A GUESS  ///////////////////////////////////////////////////////////////////////////////////////
+			document.onkeydown = function (event) {
+				var guess = event.key;
+				var notHere = 0;		
+				
+													console.log("Guess:" + guess );
+	
+// 7. LOOK FOR  THE GUESSED LETTER INSIDE THE WORD AND PUSH IT ON THE EMPTY ARRAY IF THE GUESS WAS RIGHT //////////////			
+				for (var i = 0; i < game.length; i++) {
+					if (game[i] == guess) {						
+						empty[i] = guess;
+						$("div[letter-ind=" + i + "] h2").html(empty[i]);
+					} else {
+						notHere ++;			
+					}
+				}
+			
+													console.log("this is empty :" + empty);
+				
+// 8. DECIDE IF THE LETTER IS NOT INSIDE THE WORD ////////////////////////////////////////// 				
+				if (notHere == game.length) {
+					failLetters.push(guess);
+					lostHealth ++;
+				}
+				
+													console.log ("this is failLetters:" + failLetters);
+				
+
+// 9. DEFINE WHEN YOU WIN /////////////////////////////////////////////////////////////////////////////////////////////				
+	
+				if (finalG.toString() == empty.toString()) {
+					console.log("you win!!!");
+				}
+
+// 10. DEFINE IF YOU LOSE /////////////////////////////////////////////////////////////////////////////////////////	
+				if (lostHealth == 3) {
+					console.log("You lost!!!");
+				} 
+
+			}
+
+		}); // fin on click function //////
+
+//  /////////Fin Ready function //////////////////////////////////////////
+});
+
+	
+	
+	</script>
+</body>
+</html>
