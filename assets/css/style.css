@@ -1,0 +1,126 @@
+
+body{
+	background:white;
+}
+
+#gameContainer{
+	width:980px;
+	border:2px solid black;
+	margin: auto;
+}
+
+
+.textContainer {
+	margin:5px 5px 5px 25px;
+}
+#whiteZone{
+	background-color:white;
+}
+
+#errorsContainer{
+	background-color:black;
+	width: 36px;
+	margin: 5px 5px 5px 250px;
+	border:solid 3px black;
+	display: flex;
+	flex-direction:column;
+	
+}
+
+.errCounter {
+	background-color: white;
+	width: 23px;
+	height: 35px;
+	margin:6px;
+}
+
+.row {display: table-row;
+}
+ 
+.cells{
+	display: table-cell;
+}
+
+
+.rightSide {
+	margin: 10px 10px 10px 200px;
+}
+
+#pinkZone{
+	background-color:#ff0066;
+	height: 260px;
+	
+}
+
+h1 {
+	font-family: "Courier New", Courier, monospace;
+	font-size:27px;
+	font-style:normal;
+	font-weight: bold;
+}
+
+h2 {
+	font-family: "Courier New", Courier, monospace;
+	font-size:20px;
+	font-style:normal;
+	font-weight: 500;
+	}
+
+h3 {
+	font-family: "Courier New", Courier, monospace;
+	font-size:17px;
+	font-style:normal;
+	font-weight: 500;
+	color:white;
+}
+
+p {
+	font-family: "Brush Script MT", cursive;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.text {
+	text-align: right;
+	margin:1px 1px 1px 30px;
+	line-height:0.2;
+}
+
+
+#wordContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	background-color: white; 
+	border-left:4px solid white;
+	border-right: 4px solid white;
+	
+}
+.letterBox {
+	background-color: #ff0066;
+	text-align: center;
+	margin: 5px;
+	width: 40px;
+	height: 45px;
+}
+.letter {
+	margin: 4px;
+	font-family: "Courier New", Courier, monospace;
+	color:white;
+	font-size: 2em;
+	width: 23px;
+}
+
+#iniciar,
+#iniciar:active {
+	background-color: black;
+	color: #9fa8b0;
+	font-family: "Courier New", Courier, monospace;
+    font-weight: 500;
+    text-shadow: 1px 1px #1f272b;
+    border: 1px solid #1c252b;
+    border-radius: 3px;
+    height: 30px;
+    margin: 12px 0px;
+}
