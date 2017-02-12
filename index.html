@@ -112,30 +112,26 @@
 			empty = [];
 			lostHealth = 0;
 			finalG = [];
-//  2. SELECT A WORD RANDOMLY -- After Cick on button ///////////////////////////////////////////////////////////////////////
+//  3. SELECT A WORD RANDOMLY -- After Cick on button ///////////////////////////////////////////////////////////////////////
 	  		var game = cities[Math.floor(Math.random() * cities.length)];
 	
-																	console.log (game);
-	  		
-// 3. CREATES EMPTY ARRAY AND FINALG ARRAY //////////////////////////////////////////////////////////////////////// 		
+
+// 4. CREATES EMPTY ARRAY AND FINALG ARRAY //////////////////////////////////////////////////////////////////////// 		
 	  		for (var i = 0; i < game.length; i++){
 	  			empty.push("");
 	  		}
-														console.log(empty);
 															
 	  		for (var i = 0; i < game.length; i++){
 	  			finalG.push(game[i]);
 	  		}
 console.log(finalG);
 	  			
-// 4. DEFINE THE WORD CONTAINER WIDTH ////////////////////////////////////////////////////////////////////////////
+// 5. DEFINE THE WORD CONTAINER WIDTH ////////////////////////////////////////////////////////////////////////////
 	  		widthContainer = (game.length * 41) + "px"; 
 	  		document.getElementById("wordContainer").style.width = widthContainer;
 
-// 5. CREATE DIV BOXES FOR THE LETTERS ///// ///////////////////////////////////////////////////////////////////
-	  		
+// 6. CREATE DIV BOXES FOR THE LETTERS ///// /////////////////////////////////////////////////////////////////// 		
 			
-
 			for (var i = 0; i < empty.length; i++) {
 	  			letterBox = $("<div>");
 	  			letterBox.attr("class", "letterBox");
@@ -147,34 +143,29 @@ console.log(finalG);
 	  			theletter.html(empty[i]);
 	  		}
 
-//  6. PLAYER MAKES A GUESS  ///////////////////////////////////////////////////////////////////////////////////////
+//  7. PLAYER MAKES A GUESS  ///////////////////////////////////////////////////////////////////////////////////////
 			document.onkeydown = function (event) {
 				var guess = event.key;
 				var notHere = 0;		
-				
-													console.log("Guess:" + guess );
 	
-// 7. LOOK FOR  THE GUESSED LETTER INSIDE THE WORD AND PUSH IT ON THE EMPTY ARRAY IF THE GUESS WAS RIGHT //////////////			
+// 8. LOOK FOR  THE GUESSED LETTER INSIDE THE WORD AND PUSH IT ON THE EMPTY ARRAY IF THE GUESS WAS RIGHT //////////////			
 				for (var i = 0; i < game.length; i++) {
 					if (game[i] == guess) {						
 						empty[i] = guess;
-						$("div[letter-ind=" + i + "] h2").html(empty[i]);
+						$("div[letter-ind=" + i + "] h2").html(empty[i].toUpperCase());
 					} else {
 						notHere ++;			
 					}
 				}
-			  
-													console.log("this is empty :" + empty);
 		
-// 8. DECIDE IF THE LETTER IS NOT INSIDE THE WORD ////////////////////////////////////////// 				
+// 9. DECIDE IF THE LETTER IS NOT INSIDE THE WORD ////////////////////////////////////////// 				
 				if (notHere == game.length) {
 					failLetters.push(guess);
 					lostHealth ++;
 				}
-											console.log ("this is failLetters:" + failLetters);
 				$(".temporal").html(failLetters);
 
-// 9. SHOW THE ERRORS ON THE HANGMAN MODEL //////////////////////////////////////////////
+// 10. SHOW THE ERRORS ON THE HANGMAN MODEL //////////////////////////////////////////////
 
 				if (lostHealth > 0) {
 					document.getElementById("firstError").style.backgroundColor = "#ff0066";
@@ -189,7 +180,7 @@ console.log(finalG);
 					document.getElementById("fourthError").style.backgroundColor = "#ff0066";
 				}
 
-// 10. DEFINE WHEN YOU WIN /////////////////////////////////////////////////////////////////////////////////////////////				
+// 11. DEFINE WHEN YOU WIN /////////////////////////////////////////////////////////////////////////////////////////////				
 				
 				if (finalG.toString() == empty.toString()) {
 					$(".letterBox").remove();
@@ -199,15 +190,14 @@ console.log(finalG);
 					winSum ++;
 					$("#wordContainer").append(theEnd);
 					$("#stat2").html(winSum);
-					
 				}
 
-// 11. DEFINE IF YOU LOSE /////////////////////////////////////////////////////////////////////////////////////////	
+// 12. DEFINE IF YOU LOSE /////////////////////////////////////////////////////////////////////////////////////////	
 				if (lostHealth == 4) {
 					$(".letterBox").remove();
 					var theEnd = $("<h1>");
 					theEnd.attr("class", "ender");
-				theEnd.html(game + "<br>" + "Game over");
+				theEnd.html(game.toUpperCase() + "<br>" + "Game over");
 					loseSum ++;
 					$("#wordContainer").append(theEnd);
 					$("#stat3").html(loseSum);
@@ -220,8 +210,6 @@ console.log(finalG);
 //  /////////Fin Ready function //////////////////////////////////////////
 });
 
-	
-	
 	</script>
 </body>
 </html>
