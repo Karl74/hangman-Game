@@ -20,7 +20,7 @@ body{
 #errorsContainer{
 	background-color:black;
 	width: 36px;
-	margin: 5px 5px 5px 250px;
+	margin: 5px 5px 5px 130px;
 	border:solid 3px black;
 	display: flex;
 	flex-direction:column;
@@ -43,7 +43,11 @@ body{
 
 
 .rightSide {
-	margin: 10px 10px 10px 200px;
+	margin: 10px 10px 10px 270px;
+}
+.temporal{
+	color: #ff0066;
+	font-family: "Courier New", Courier, monospace;
 }
 
 #pinkZone{

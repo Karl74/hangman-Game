@@ -18,16 +18,16 @@
 				<div class="cells">
 						<div id="errorsWraper" >
 							<div id="errorsContainer">
-								<div id="error1" class="errCounter">
+								<div id="firstError" class="errCounter">
 								</div>
 
-								<div id="error2" class="errCounter">
+								<div id="secondError" class="errCounter">
 								</div>
 
-								<div id="error3" class="errCounter">
+								<div id="thirdError" class="errCounter">
 								</div>
 
-								<div id="error4" class="errCounter">
+								<div id="fourthError" class="errCounter">
 								</div>
 							</div>	
 						</div>
@@ -77,7 +77,6 @@
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script type="text/javascript">
-	
 		
 // 1. GLOBAL VARIABLES /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,15 +87,25 @@
 		var empty = [];
 		var lostHealth = 0;
 		var finalG = []; 
-				
-//  2. SELECT A WORD RANDOMLY -- After Cick on button ///////////////////////////////////////////////////////////////////////
+		var letterBox;
+		var theletter;
+
+// 2. CLEAR PREVIOUS GAME DATA////////////////////////////////////////////////////////////////////////////////////////////////////				
 		
 		$("#iniciar").on("click", function() {
+			$(".ender").remove();
+			document.getElementById("firstError").style.backgroundColor = "white";
+			document.getElementById("secondError").style.backgroundColor = "white";
+			document.getElementById("thirdError").style.backgroundColor = "white";
+			document.getElementById("fourthError").style.backgroundColor = "white";
+			$(".temporal").html("_ _ _ _ _ _ _ _ ")
 			failLetters = [];
 			empty = [];
 			lostHealth = 0;
 			finalG = [];
+//  2. SELECT A WORD RANDOMLY -- After Cick on button ///////////////////////////////////////////////////////////////////////
 	  		var game = cities[Math.floor(Math.random() * cities.length)];
+	
 																	console.log (game);
 	  		
 // 3. CREATES EMPTY ARRAY AND FINALG ARRAY //////////////////////////////////////////////////////////////////////// 		
@@ -111,15 +120,12 @@
 console.log(finalG);
 	  			
 // 4. DEFINE THE WORD CONTAINER WIDTH ////////////////////////////////////////////////////////////////////////////
-	  		var widthContainer = (game.length * 41) + "px"; 
+	  		widthContainer = (game.length * 41) + "px"; 
 	  		document.getElementById("wordContainer").style.width = widthContainer;
-
-
 
 // 5. CREATE DIV BOXES FOR THE LETTERS ///// ///////////////////////////////////////////////////////////////////
 	  		
-			var letterBox;
-			var theletter;
+			
 
 			for (var i = 0; i < empty.length; i++) {
 	  			letterBox = $("<div>");
@@ -148,31 +154,54 @@ console.log(finalG);
 						notHere ++;			
 					}
 				}
-			
+			  
 													console.log("this is empty :" + empty);
-				
+		
 // 8. DECIDE IF THE LETTER IS NOT INSIDE THE WORD ////////////////////////////////////////// 				
 				if (notHere == game.length) {
 					failLetters.push(guess);
 					lostHealth ++;
 				}
-				
-													console.log ("this is failLetters:" + failLetters);
-				
+											console.log ("this is failLetters:" + failLetters);
+				$(".temporal").html(failLetters);
 
-// 9. DEFINE WHEN YOU WIN /////////////////////////////////////////////////////////////////////////////////////////////				
-	
-				if (finalG.toString() == empty.toString()) {
-					console.log("you win!!!");
+// 9. SHOW THE ERRORS ON THE HANGMAN MODEL //////////////////////////////////////////////
+
+				if (lostHealth > 0) {
+					document.getElementById("firstError").style.backgroundColor = "#ff0066";
+				}
+				if (lostHealth > 1) {
+					document.getElementById("secondError").style.backgroundColor = "#ff0066";
+				}
+				if (lostHealth > 2) {
+					document.getElementById("thirdError").style.backgroundColor = "#ff0066";
+				}
+				if (lostHealth > 3) {
+					document.getElementById("fourthError").style.backgroundColor = "#ff0066";
 				}
 
-// 10. DEFINE IF YOU LOSE /////////////////////////////////////////////////////////////////////////////////////////	
-				if (lostHealth == 3) {
-					console.log("You lost!!!");
+// 10. DEFINE WHEN YOU WIN /////////////////////////////////////////////////////////////////////////////////////////////				
+				
+				if (finalG.toString() == empty.toString()) {
+					$(".letterBox").remove();
+					var theEnd = $("<h1>");
+					theEnd.attr("class", "ender");
+					theEnd.html("YOU WIN !!!");
+					$("#wordContainer").append(theEnd);
+					
+				}
+
+// 11. DEFINE IF YOU LOSE /////////////////////////////////////////////////////////////////////////////////////////	
+				if (lostHealth == 4) {
+					$(".letterBox").remove();
+					var theEnd = $("<h1>");
+					theEnd.attr("class", "ender");
+				theEnd.html("Game over");
+					$("#wordContainer").append(theEnd);
 				} 
 
 			}
-
+			
 		}); // fin on click function //////
 
 //  /////////Fin Ready function //////////////////////////////////////////
